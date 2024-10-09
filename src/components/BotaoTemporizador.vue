@@ -35,3 +35,12 @@ import { defineComponent } from 'vue';
     })
 
 </script>
+
+<style>
+
+    .button{
+        color: var(--texto-primario);
+        background-color: var(--bg-primario);
+    }
+
+</style>

@@ -1,16 +1,11 @@
 <template>
-    <div class="box">
+    <div class="box formulario">
         <div class="columns">
             <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
-                <input
-                    type="text" 
-                    class="input" 
-                    placeholder="Qual tarefa deseja adicionar? " 
-                    v-model="descricao"    
-                />
+                <input type="text" class="input" placeholder="Qual tarefa deseja adicionar? " v-model="descricao" />
             </div>
             <div class="column">
-                <Temporizador @aoTemporizadorFinalizado="finalizarTarefa"/>
+                <Temporizador @aoTemporizadorFinalizado="finalizarTarefa" />
             </div>
         </div>
     </div>
@@ -20,24 +15,47 @@
 import { defineComponent } from 'vue';
 import Temporizador from './Temporizador.vue';
 
-    export default defineComponent({
-        name:"Formulario",
-        components: {
-            Temporizador
-        },
-        data () {
-            return {
-                descricao: ''
-            }
-        },
-        methods: {
-            finalizarTarefa(tempoDecorrido: number) : void{
-
-                console.log('Tempo decorrido:', tempoDecorrido);
-                console.log('descricao da tarefa: ' , this.descricao);
-                this.descricao = ''
-
-            }
+export default defineComponent({
+    name: "Formulario",
+    components: {
+        Temporizador
+    },
+    data() {
+        return {
+            descricao: ''
         }
-    })
+    },
+    emits: ['aoSalvarTarefa']
+    ,
+    methods: {
+        finalizarTarefa(tempoDecorrido: number): void {
+
+            this.$emit('aoSalvarTarefa', {
+                duracaoEmSegundos: tempoDecorrido,
+                descricao: this.descricao
+            }
+            )
+            console.log('Tempo decorrido:', tempoDecorrido);
+            console.log('descricao da tarefa: ', this.descricao);
+            this.descricao = ''
+
+        }
+    },
+})
 </script>
+
+<style>
+.formulario {
+    color: var(--texto-primario);
+    background-color: var(--bg-primario);
+}
+
+.input::placeholder {
+    color: var(--texto-primario);
+
+}
+
+.input {
+    background-color: var(--bg-primario);
+}
+</style>
