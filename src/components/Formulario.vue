@@ -57,5 +57,6 @@ export default defineComponent({
 
 .input {
     background-color: var(--bg-primario);
+    color: var(--texto-primario);
 }
 </style>

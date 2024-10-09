@@ -31,7 +31,9 @@ export default defineComponent({
 <style>
 
 .display{
-    color: var(--texto-primario);
+    strong{
+        color: var(--texto-primario);
+    }
 
 }
 
